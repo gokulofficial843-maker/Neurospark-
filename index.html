@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEUROSPARK — Explore Your Mind</title><style>
+:root{--bg:#050b1a;--c:#22d3ee;--b:#3b82f6;--ok:#22e08a;--no:#ff3b5c}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#0b1d42,var(--bg) 60%);color:#fff;font-family:system-ui,'Segoe UI',sans-serif;min-height:100vh}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}#fx{position:fixed;inset:0;z-index:50;pointer-events:none;transition:box-shadow .3s}
+#fx.good{box-shadow:inset 0 0 120px rgba(34,224,138,.6)}#fx.bad{box-shadow:inset 0 0 140px rgba(255,59,92,.7)}
+header,main,footer{position:relative;z-index:1}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 28px;background:rgba(5,11,26,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(34,211,238,.25);position:sticky;top:0;z-index:5;flex-wrap:wrap;gap:8px}
+.logo{font-weight:800;letter-spacing:3px;color:var(--c);font-size:20px}nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+nav button,.btn{font:inherit;cursor:pointer;color:#fff;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.5);border-radius:999px;padding:9px 20px;letter-spacing:1px;transition:.25s}
+nav button{font-size:13px;padding:7px 14px}nav button:hover,.btn:hover{background:var(--c);color:#031018;box-shadow:0 0 20px var(--c)}.btn:focus-visible,nav button:focus-visible{outline:3px solid #fff}
+.btn.ghost{background:transparent;border-color:#667}.btn.big{font-size:18px;padding:14px 32px;font-weight:700;background:linear-gradient(90deg,var(--b),var(--c));color:#031018;border:0}
+.view{display:none;max-width:1100px;margin:auto;padding:28px 20px;animation:in .5s}.view.on{display:block}@keyframes in{from{opacity:0;transform:translateY(16px)}}
+.hero{text-align:center;padding:30px 0}.hero h1{font-size:clamp(44px,8vw,86px);letter-spacing:10px;margin:0;background:linear-gradient(90deg,#fff,var(--c),var(--b));-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(34,211,238,.5))}
+.hero h3{color:var(--c);font-weight:400;letter-spacing:3px}.hero p{max-width:700px;margin:12px auto 24px;color:#b8c7e0;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px}
+.card,.panel{background:rgba(255,255,255,.06);backdrop-filter:blur(14px);border:1px solid rgba(34,211,238,.3);border-radius:20px;padding:22px;box-shadow:0 0 25px rgba(34,211,238,.08);transition:.3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 0 35px rgba(34,211,238,.45);border-color:var(--c)}.card .ic{font-size:44px;animation:fl 3s ease-in-out infinite;display:inline-block}@keyframes fl{50%{transform:translateY(-8px) scale(1.1)}}
+.card h4{margin:8px 0;letter-spacing:2px;color:var(--c)}.card p{color:#b8c7e0;font-size:14px;min-height:60px}.card.done{border-color:var(--ok)}.tick{color:var(--ok);font-weight:700}
+.panel{max-width:760px;margin:auto;text-align:center}.panel h2{color:var(--c);letter-spacing:1px}.ins{font-size:20px;font-weight:700;color:#fff;background:rgba(59,130,246,.2);padding:10px;border-radius:12px}
+form{max-width:480px;margin:auto;display:grid;gap:14px;text-align:left}label{font-size:13px;color:#b8c7e0;letter-spacing:1px}
+input,select{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(34,211,238,.4);background:#0a1530;color:#fff;font:inherit;margin-top:4px}.err{color:var(--no);font-size:12px;min-height:14px}
+.bar{height:10px;background:#1a2748;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--b),var(--c));transition:width 1.2s}
+.meta{color:#b8c7e0;margin-bottom:12px}.word{font-size:clamp(60px,12vw,120px);font-weight:900;margin:14px 0;min-height:120px}.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0}.col{font-weight:700;border-width:2px;min-width:130px}
+.ring{position:relative;width:260px;height:260px;margin:10px auto}.ring svg{width:100%;transform:rotate(-90deg)}.tr{fill:none;stroke:#1a2748;stroke-width:10}.pg{fill:none;stroke:var(--c);stroke-width:10;stroke-linecap:round;stroke-dasharray:565.5;stroke-dashoffset:565.5;filter:drop-shadow(0 0 8px var(--c))}
+#tm{position:absolute;inset:0;display:grid;place-items:center;font-size:52px;font-weight:800;font-variant-numeric:tabular-nums}.pulse #tm{animation:pl 1s infinite}@keyframes pl{50%{text-shadow:0 0 25px var(--c)}}
+.hg{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px}.hg button{font-size:30px;width:56px;height:56px;border-radius:14px;border:1px solid #2a4170;background:#0a1530;color:#cfe;cursor:pointer}.hg button:hover{box-shadow:0 0 12px var(--c)}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}.tg{font-size:30px;color:#ffd84a;text-shadow:0 0 14px #ffd84a}
+.mc{width:74px;height:94px;border-radius:14px;display:grid;place-items:center;font-size:36px;border:2px solid var(--c);background:#0d1e44;box-shadow:0 0 14px var(--c);transition:transform .6s,background .3s}.mc.hid{transform:rotateY(180deg);background:#16264f}.mc b{transition:opacity .2s .25s}.mc.hid b{opacity:0}.mc.hid:after{content:'?';position:absolute;font-size:30px;transform:rotateY(180deg);color:var(--c)}.mc{position:relative}.mc.g{border-color:var(--ok);box-shadow:0 0 14px var(--ok)}.mc.r{border-color:var(--no);box-shadow:0 0 14px var(--no)}
+#cd{position:fixed;inset:0;z-index:60;background:rgba(5,11,26,.9);display:none;place-items:center;font-size:150px;font-weight:900;color:var(--c)}
+table{width:100%;border-collapse:collapse;text-align:left;font-size:14px}td{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.08)}td:last-child{text-align:right;font-weight:700;color:var(--c)}
+.disc{font-size:12px;color:#8fa3c4;margin-top:14px}.rc{opacity:0;animation:in .6s forwards}details{background:rgba(255,255,255,.05);border-radius:12px;padding:12px;margin:8px 0;text-align:left}summary{cursor:pointer;color:var(--c);font-weight:700}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;align-items:center}.st{margin:14px;font-weight:700;color:var(--ok)}
+footer{text-align:center;padding:26px;color:#8fa3c4;font-size:13px;border-top:1px solid rgba(34,211,238,.2)}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0d1e44;border:1px solid var(--c);padding:10px 20px;border-radius:12px;z-index:70;display:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body><canvas id="bg"></canvas><div id="fx"></div><div id="cd"></div><div id="toast"></div>
+<header><div class="logo">🧠 NEUROSPARK</div><nav><button data-go="home">HOME</button><button data-go="lab">COGNITIVE TESTS</button><button data-go="about">ABOUT</button><button data-go="results">RESULTS</button><button id="snd" aria-label="Toggle sound">🔊 SOUND ON</button></nav></header>
+<main>
+<section class="view on" id="home"><div class="hero"><h1>NEUROSPARK</h1><h3>Explore Your Mind. Test Your Cognition.</h3><p>Welcome to NeuroSpark, an interactive cognition experience designed to demonstrate how attention, memory, reaction time, and inhibitory control influence human behaviour.</p><button class="btn big" data-enter>ENTER THE NEUROSPARK LAB</button></div><div class="grid" id="hc"></div></section>
+<section class="view" id="reg"><div class="panel"><h2>Participant Registration</h2><form id="rf" novalidate>
+<div><label>STUDENT NAME</label><input id="n" autocomplete="off"><div class="err"></div></div>
+<div><label>DEPARTMENT</label><select id="d"><option value="">Select…</option><option>Psychology</option><option>Computer Science</option><option>Commerce</option><option>English</option><option>Mathematics</option><option>Other</option></select><div class="err"></div></div>
+<div><label>COLLEGE / INSTITUTION</label><input id="c" autocomplete="off"><div class="err"></div></div>
+<div><label>MOBILE NUMBER (results will be sent here)</label><input id="m" inputmode="tel" placeholder="10-digit number"><div class="err"></div></div>
+<button class="btn big" type="submit">START MY COGNITIVE JOURNEY</button></form></div></section>
+<section class="view" id="lab"></section>
+<section class="view" id="game"></section>
+<section class="view" id="results"></section>
+<section class="view" id="about"><div class="panel" style="text-align:left"><h2>About NeuroSpark</h2><p>NeuroSpark is an interactive cognition awareness project developed to help visitors experience basic cognitive processes through simple activities.</p>
+<details open><summary>Attention</summary>Choosing what to focus on and ignoring the rest.</details><details><summary>Memory</summary>Encoding, storing and retrieving information; working memory holds a few items for a short time.</details><details><summary>Inhibitory Control</summary>Holding back an automatic response (like reading a word) to do what the task requires.</details><details><summary>Reaction / Response</summary>How quickly and accurately we respond to what we perceive.</details><details><summary>Time Perception</summary>Our internal sense of how much time has passed.</details><details><summary>Cognitive Interference</summary>When two pieces of information conflict, such as a word's meaning versus its ink colour.</details>
+<p class="disc">NeuroSpark activities are educational demonstrations of cognitive processes and are not diagnostic psychological tests.</p></div></section>
+</main>
+<footer>NeuroSpark — Cognition Awareness Project<br>Department of Psychology<br>Educational Demonstration • Not a Clinical Assessment</footer>
+<script>
+/* ===== CONFIG (frontend). The SMS provider + credentials live ONLY in server.js ===== */
+const API_URL='/api/send-results';
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let S=JSON.parse(sessionStorage.ns||'null')||{p:null,r:{},rec:0,sent:''};const save=()=>sessionStorage.ns=JSON.stringify(S);
+const rnd=n=>Math.random()*n|0,shuf=a=>[...a].sort(()=>Math.random()-.5),avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0,clamp=(v,a=0,b=100)=>Math.max(a,Math.min(b,v)),f1=v=>v.toFixed(1);
+/* ===== Beep sounds (WebAudio) ===== */
+let snd=true,AC;function beep(f,d=.1,t='sine',v=.08,at=0){if(!snd)return;AC=AC||new(window.AudioContext||webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),T=AC.currentTime+at;o.type=t;o.frequency.value=f;g.gain.setValueAtTime(v,T);g.gain.exponentialRampToValueAtTime(.0001,T+d);o.connect(g);g.connect(AC.destination);o.start(T);o.stop(T+d)}
+const SFX={click:()=>beep(660,.06),start:()=>beep(1200,.25),tick:()=>beep(1000,.04,'triangle',.05),ok:()=>{beep(880,.1);beep(1175,.14,'sine',.08,.09)},bad:()=>beep(170,.25,'square',.05),done:()=>[523,659,784,1047].forEach((f,i)=>beep(f,.2,'sine',.08,i*.12))};
+$('#snd').onclick=e=>{snd=!snd;e.target.textContent=snd?'🔊 SOUND ON':'🔇 SOUND OFF';SFX.click()};
+/* ===== Background neurons + bursts ===== */
+const cv=$('#bg'),cx=cv.getContext('2d');let NN=[],BB=[];const rs=()=>{cv.width=innerWidth;cv.height=innerHeight};rs();onresize=rs;
+for(let i=0;i<55;i++)NN.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:Math.random()-.5,vy:Math.random()-.5});
+(function lp(){cx.clearRect(0,0,cv.width,cv.height);NN.forEach(n=>{n.x+=n.vx*.4;n.y+=n.vy*.4;if(n.x<0||n.x>cv.width)n.vx*=-1;if(n.y<0||n.y>cv.height)n.vy*=-1;cx.globalAlpha=.7;cx.fillStyle='#22d3ee';cx.beginPath();cx.arc(n.x,n.y,1.8,0,7);cx.fill()});
+for(let i=0;i<NN.length;i++)for(let j=i+1;j<NN.length;j++){const d=Math.hypot(NN[i].x-NN[j].x,NN[i].y-NN[j].y);if(d<140){cx.globalAlpha=(1-d/140)*.35;cx.strokeStyle='#3b82f6';cx.beginPath();cx.moveTo(NN[i].x,NN[i].y);cx.lineTo(NN[j].x,NN[j].y);cx.stroke()}}
+BB=BB.filter(p=>p.l>0);BB.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.12;p.l--;cx.globalAlpha=p.l/50;cx.fillStyle=p.c;cx.fillRect(p.x,p.y,4,4)});requestAnimationFrame(lp)})();
+function burst(x=innerWidth/2,y=innerHeight/2,c='#22d3ee',n=30){for(let i=0;i<n;i++)BB.push({x,y,vx:(Math.random()-.5)*9,vy:Math.random()*-8,l:50,c})}
+const confetti=()=>['#22d3ee','#3b82f6','#ffd84a','#22e08a'].forEach((c,i)=>setTimeout(()=>burst(innerWidth*(.2+i*.2),innerHeight*.4,c,60),i*150));
+function flash(k){const f=$('#fx');f.className=k;setTimeout(()=>f.className='',250)}
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2600)}
+/* ===== Navigation ===== */
+let KEY=null;onkeydown=e=>KEY&&KEY(e);
+const done=()=>Object.keys(S.r).length;
+function show(id){KEY=null;$$('.view').forEach(v=>v.classList.toggle('on',v.id==id));scrollTo(0,0);if(id=='lab')lab();if(id=='results')results()}
+function go(id){SFX.click();if(id=='home'||id=='about')return show(id);if(!S.p)return show('reg');if(id=='results'&&done()<4){toast('Complete all 4 tests to see results ('+done()+'/4)');return show('lab')}show(id)}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go);if(e.target.closest('[data-enter]'))go('lab')});
+onbeforeunload=e=>{if(S.p&&done()&&!S.rec){e.preventDefault();return ''}};
+/* ===== Test metadata ===== */
+const T=[{k:'stroop',ic:'🧠',n:'STROOP EFFECT',d:'Can your brain ignore the word? Name the ink colour, not the text.'},{k:'watch',ic:'⏱️',n:'STOPWATCH TEST',d:'Stop the timer as close to 10.00 seconds as you can.'},{k:'hunt',ic:'🎯',n:'ATTENTION HUNT',d:'Find the target among growing numbers of distractors.'},{k:'mem',ic:'🧩',n:'MEMORY CHALLENGE',d:'Memorise the sequence, then recall it in order.'}];
+const INFO={stroop:{c:'Selective attention · Inhibitory control · Cognitive interference · Executive functioning',x:'Your performance in this activity demonstrates how effectively you managed the interference between word meaning and colour information during this task.',e:'Errors can occur when automatic word reading interferes with colour identification.'},
+watch:{c:'Sustained attention · Time perception · Response control · Internal timing',x:'This activity demonstrates time estimation, attention, internal timing and response control.',e:'Timing error can occur because estimating elapsed time involves attention and internal timing.'},
+hunt:{c:'Selective attention · Visual search · Sustained attention · Distractor inhibition · Processing speed',x:'This activity demonstrates selective attention and visual search. The participant must focus on relevant information while ignoring distracting information.',e:'Errors may occur when distractors compete for attention.'},
+mem:{c:'Encoding · Storage · Retrieval · Working memory · Attention',x:'This activity demonstrates short-term/working-memory processes involved in temporarily holding and recalling information.',e:'Errors may occur when information is not effectively encoded, maintained or retrieved.'}};
+const DISC='This is an educational demonstration, not a clinical psychological assessment.';
+function tcards(el,start){el.innerHTML=T.map(t=>`<div class="card ${S.r[t.k]?'done':''}"><span class="ic">${t.ic}</span><h4>${t.n}</h4><p>${t.d}</p>${S.r[t.k]?'<div class="tick">✓ Completed</div>':''}<button class="btn" data-t="${t.k}">${S.r[t.k]?'RETAKE':'START TEST'}</button></div>`).join('');
+el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{SFX.click();if(!S.p)return show('reg');start(b.dataset.t)})}
+tcards($('#hc'),k=>run(k));
+function lab(){const n=done();$('#lab').innerHTML=`<div class="hero" style="padding:10px"><h2 style="font-size:32px">Welcome, ${esc(S.p.name)} 👋</h2><div class="meta">Tests Completed: <b>${n}/4</b> — complete them in any order</div><div class="bar" style="max-width:420px;margin:auto"><i id="pb"></i></div></div><div class="grid" id="lc"></div>`;setTimeout(()=>$('#pb').style.width=n*25+'%',50);tcards($('#lc'),run)}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ===== Registration ===== */
+$('#rf').onsubmit=e=>{e.preventDefault();const v=['n','d','c','m'].map(i=>$('#'+i).value.trim()),msg=['Enter your name','Select a department','Enter your college','Enter a valid 10-digit mobile number'],ok=[v[0].length>1,!!v[1],v[2].length>1,/^(\+?\d{1,3}[ -]?)?\d{10}$/.test(v[3].replace(/\s/g,''))];
+$$('#rf .err').forEach((x,i)=>x.textContent=ok[i]?'':msg[i]);if(ok.includes(false)){SFX.bad();return}
+S={p:{name:v[0],dept:v[1],college:v[2],mobile:v[3]},r:{},rec:0,sent:''};save();SFX.start();show('lab')};
+/* ===== Shared game helpers ===== */
+const G=()=>$('#game');
+function run(k){show('game');({stroop,watch,hunt,mem})[k]()}
+function intro(title,ex,ins,go){G().innerHTML=`<div class="panel"><h2>${title}</h2><p>${ex}</p><p class="ins">${ins}</p><button class="btn big" id="go">START</button> <button class="btn ghost" data-go="lab">← Back</button></div>`;$('#go').onclick=()=>{SFX.start();cd(go)}}
+function cd(cb){const e=$('#cd');let n=3;e.style.display='grid';e.textContent=n;SFX.tick();const iv=setInterval(()=>{n--;if(n<=0){clearInterval(iv);e.style.display='none';SFX.start();cb()}else{e.textContent=n;SFX.tick()}},800)}
+function finish(k,d,stats){S.r[k]=d;save();SFX.done();confetti();G().innerHTML=`<div class="panel"><h2>✓ ${T.find(t=>t.k==k).n} Completed</h2><table>${stats.map(s=>`<tr><td>${s[0]}</td><td>${s[1]}</td></tr>`).join('')}</table><p>${INFO[k].x}</p><p class="meta">Concepts: ${INFO[k].c}</p><p class="disc">${DISC}</p><button class="btn big" id="nx">${done()==4?'VIEW MY RESULTS':'BACK TO LAB'}</button></div>`;$('#nx').onclick=()=>{SFX.click();show(done()==4?'results':'lab')}}
+/* ===== GAME 1: STROOP ===== */
+function stroop(){const C=[['RED','#ff3b5c'],['BLUE','#3b82ff'],['GREEN','#22e08a'],['YELLOW','#ffd84a']];
+intro('STROOP EFFECT — Can Your Brain Ignore the Word?','The Stroop Effect demonstrates cognitive interference. When the meaning of a word conflicts with its ink colour, the brain has to inhibit the automatic reading response and focus on the colour.','Select the INK COLOUR, not the word you read. (Keys 1–4 also work)',()=>{
+let i=0,ok=0,er=0,st=0,best=0,rts=[],cur,t0,T0=performance.now();
+G().innerHTML=`<div class="panel"><div class="meta" id="m"></div><div class="word" id="w"></div><div class="row">${C.map((c,j)=>`<button class="btn col" data-i="${j}" style="border-color:${c[1]}">${j+1} · ${c[0]}</button>`).join('')}</div></div>`;
+function nx(){if(i>=30)return end();const w=rnd(4);cur=Math.random()<.7?(w+1+rnd(3))%4:w;$('#w').textContent=C[w][0];$('#w').style.color=C[cur][1];t0=performance.now();$('#m').textContent=`Trial ${i+1}/30 · Correct ${ok} · Errors ${er} · Streak ${st}`}
+function pick(j){rts.push(performance.now()-t0);if(j==cur){ok++;st++;best=Math.max(best,st);SFX.ok();flash('good');if(st>=5)burst(innerWidth/2,innerHeight/2,'#22e08a',20)}else{er++;st=0;SFX.bad();flash('bad')}i++;nx()}
+G().querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>pick(+b.dataset.i));KEY=e=>{if(/^[1-4]$/.test(e.key))pick(+e.key-1)};
+function end(){KEY=null;const t=(performance.now()-T0)/1000,rt=avg(rts);finish('stroop',{correct:ok,errors:er,attempts:30,acc:ok/30*100,rt,time:t,streak:best},[['Correct',ok+'/30'],['Errors',er],['Attempts (trials)',30],['Accuracy',f1(ok/30*100)+'%'],['Avg response time',Math.round(rt)+' ms'],['Total time',f1(t)+' s'],['Best streak',best]])}nx()})}
+/* ===== GAME 2: STOPWATCH ===== */
+function watch(){intro('STOPWATCH CHALLENGE — Stop at the Target Time','You get 3 attempts. Your timing error is |Actual − Target|.','Stop the stopwatch as close as possible to 10.00 seconds. (Space bar works)',()=>{
+let a=[],run=0,t0,raf,tk,lock=0;G().innerHTML=`<div class="panel"><div class="meta" id="m">Target 10.00 s · Attempt 1/3</div><div class="ring" id="rg"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" class="tr"/><circle id="pg" cx="100" cy="100" r="90" class="pg"/></svg><div id="tm">00.00</div></div><button class="btn big" id="sb">START</button><div id="rs" class="st"></div></div>`;
+const fm=t=>t.toFixed(2).padStart(5,'0');
+function tick(){const t=(performance.now()-t0)/1000;$('#tm').textContent=fm(t);$('#pg').style.strokeDashoffset=565.5*(1-Math.min(t/10,1));raf=requestAnimationFrame(tick)}
+function tog(){if(lock)return;if(!run){run=1;t0=performance.now();$('#sb').textContent='STOP';$('#rs').textContent='';$('#rg').classList.add('pulse');SFX.start();tk=setInterval(SFX.tick,1000);tick()}
+else{const t=(performance.now()-t0)/1000;run=0;cancelAnimationFrame(raf);clearInterval(tk);$('#tm').textContent=fm(t);$('#rg').classList.remove('pulse');a.push(t);const e=Math.abs(t-10);SFX.ok();burst(innerWidth/2,innerHeight/2,e<.5?'#22e08a':'#22d3ee',25);
+$('#rs').innerHTML=`Your time: ${t.toFixed(2)} s · Error: ${e.toFixed(2)} s`;
+if(a.length==3){lock=1;$('#sb').style.display='none';setTimeout(end,1800)}else{$('#m').textContent=`Target 10.00 s · Attempt ${a.length+1}/3`;$('#sb').textContent='START'}}}
+$('#sb').onclick=tog;KEY=e=>{if(e.code=='Space'){e.preventDefault();tog()}};
+function end(){KEY=null;const er=a.map(t=>Math.abs(t-10)),me=avg(er),acc=clamp(100-me*10);finish('watch',{target:10,attempts:3,times:a,actual:avg(a),error:me,acc},[['Target time','10.00 s'],['Attempts',a.map(t=>t.toFixed(2)).join(' / ')],['Mean actual time',avg(a).toFixed(2)+' s'],['Absolute error (mean)',me.toFixed(2)+' s'],['Accuracy score',f1(acc)+'%']])}})}
+/* ===== GAME 3: ATTENTION HUNT ===== */
+function hunt(){const P=['○','△','□','★','◆','●','▲','■','✚','⬟'],L=[12,24,40,40];
+intro('ATTENTION HUNT — Find the Target','This activity demonstrates selective attention and visual search. Level 1: few objects · Level 2: more · Level 3: more distractors · Level 4: the target changes quickly!','Click the target symbol as fast as you can.',()=>{
+let r=0,ok=0,er=0,ms=0,cl=0,rts=[],tg,t0,to;G().innerHTML=`<div class="panel"><div class="meta" id="m"></div><div class="tg" id="tg"></div><div class="hg" id="hg"></div></div>`;
+function round(){clearTimeout(to);if(r>=12)return end();const lv=r/3|0;tg=P[rnd(10)];const it=shuf([tg,...Array.from({length:L[lv]-1},()=>{let s;do s=P[rnd(10)];while(s==tg);return s})]);
+$('#tg').textContent='FIND: '+tg;$('#m').textContent=`Level ${lv+1}/4 · Round ${r%3+1}/3 · Found ${ok} · Errors ${er} · Missed ${ms}`+(r%3==0&&r?' · ⬆ LEVEL UP':'');
+$('#hg').innerHTML=it.map(s=>`<button style="transform:rotate(${rnd(30)-15}deg);color:hsl(${rnd(360)},70%,70%)">${s}</button>`).join('');t0=performance.now();
+to=setTimeout(()=>{ms++;SFX.bad();flash('bad');r++;round()},lv==3?3500:7000)}
+$('#hg').onclick=e=>{const b=e.target.closest('button');if(!b)return;cl++;if(b.textContent==tg){rts.push(performance.now()-t0);ok++;SFX.ok();flash('good');const q=b.getBoundingClientRect();burst(q.x+28,q.y+28,'#ffd84a',35);r++;round()}else{er++;SFX.bad();flash('bad');$('#hg').classList.remove('shake');void $('#hg').offsetWidth;$('#hg').classList.add('shake');$('#m').textContent=$('#m').textContent.replace(/Errors \d+/,'Errors '+er)}};
+function end(){const rt=avg(rts),acc=ok/(ok+er+ms)*100;finish('hunt',{correct:ok,errors:er,missed:ms,attempts:cl,rounds:12,rt,acc},[['Correct',ok+'/12'],['Errors (wrong clicks)',er],['Missed targets',ms],['Attempts (clicks)',cl],['Avg reaction time',Math.round(rt)+' ms'],['Accuracy',f1(acc)+'%']])}round()})}
+/* ===== GAME 4: MEMORY ===== */
+function mem(){const E=['🍎','🚀','🎵','🌙','⚡','🔥','🌿','💎','🎲','🔔'],Ls=[4,6,8,10];
+intro('MEMORY CHALLENGE — How Much Can You Remember?','Cards are shown briefly, then flipped. Rebuild the sequence in the correct order. Levels grow from 4 to 10 items.','Memorise the order, then tap the symbols in the same order.',()=>{
+let li=0,ok=0,er=0,taps=0,lv=[],T0=performance.now();
+function level(){const n=Ls[li],seq=shuf(E).slice(0,n);G().innerHTML=`<div class="panel"><div class="meta">Level ${li+1}/4 · Memorise ${n} items…</div><div class="row" id="cs">${seq.map(e=>`<div class="mc"><b>${e}</b></div>`).join('')}</div><div id="rc"></div></div>`;SFX.start();
+setTimeout(()=>{$$('.mc').forEach(c=>c.classList.add('hid'));SFX.tick();recall(n,seq)},2000+n*500)}
+function recall(n,seq){let ans=[];$('.meta').textContent=`Level ${li+1}/4 · Recall the sequence (${n} items)`;
+function draw(){$('#rc').innerHTML=`<p>Your answer: ${ans.join(' ')||'—'} (${ans.length}/${n})</p><div class="row">${E.map(e=>`<button class="btn" style="font-size:26px" data-e="${e}">${e}</button>`).join('')}</div><button class="btn ghost" id="un">↩ UNDO</button>`;
+$('#rc').querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{if(ans.length>=n)return;ans.push(b.dataset.e);taps++;SFX.click();draw();if(ans.length==n)check()});$('#un').onclick=()=>{ans.pop();taps++;SFX.click();draw()}}
+function check(){const cs=$$('.mc');let c=0;seq.forEach((e,i)=>{const g=ans[i]==e;if(g)c++;cs[i].classList.remove('hid');cs[i].querySelector('b').textContent=e;cs[i].classList.add(g?'g':'r')});ok+=c;er+=n-c;lv.push([c,n]);c==n?SFX.ok():SFX.bad();if(c==n){flash('good');burst(innerWidth/2,innerHeight/2,'#22d3ee',50)}else flash('bad');$('#rc').innerHTML=`<p class="st">Level ${li+1}: ${c}/${n} correct${c==n?' — LEVEL UP! ⬆':''}</p>`;li++;setTimeout(()=>li<4?level():end(),1800)}draw()}
+function end(){const t=(performance.now()-T0)/1000,rc=ok/28*100;finish('mem',{correct:ok,errors:er,total:28,attempts:taps,recall:rc,time:t,levels:lv},[['Correct items',ok+'/28'],['Incorrect items',er],['Attempts (taps)',taps],['Sequence accuracy / Recall',f1(rc)+'%'],['Per level',lv.map(l=>l[0]+'/'+l[1]).join(' · ')],['Completion time',f1(t)+' s']])}level()})}
+/* ===== RESULTS ===== */
+function profile(){const r=S.r;return{ATTENTION:clamp(r.hunt.acc*.7+clamp(100-(r.hunt.rt-800)/25)*.3),MEMORY:r.mem.recall,'INHIBITORY CONTROL':clamp(r.stroop.acc*.7+clamp(100-(r.stroop.rt-700)/20)*.3),'TIME/RESPONSE CONTROL':r.watch.acc}}
+function rows(k){const d=S.r[k];return{stroop:[['Correct',d.correct+'/30'],['Errors',d.errors],['Attempts',d.attempts],['Accuracy',f1(d.acc)+'%'],['Avg response time',Math.round(d.rt)+' ms'],['Total time',f1(d.time)+' s']],
+watch:[['Target time','10.00 s'],['Actual time (mean)',d.actual.toFixed(2)+' s'],['Attempts',d.times.map(t=>t.toFixed(2)).join(' / ')],['Error (mean)',d.error.toFixed(2)+' s'],['Accuracy',f1(d.acc)+'%']],
+hunt:[['Correct',d.correct+'/12'],['Errors',d.errors],['Missed',d.missed],['Attempts (clicks)',d.attempts],['Reaction time',Math.round(d.rt)+' ms'],['Accuracy',f1(d.acc)+'%']],
+mem:[['Correct',d.correct+'/28'],['Errors',d.errors],['Attempts (taps)',d.attempts],['Recall',f1(d.recall)+'%'],['Completion time',f1(d.time)+' s']]}[k]}
+const today=()=>new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+function msg(){const r=S.r;return `NeuroSpark (Psychology Dept) – ${S.p.name}: Stroop ${f1(r.stroop.acc)}% acc, ${r.stroop.errors} errors; Stopwatch error ${r.watch.error.toFixed(2)}s; Attention Hunt ${f1(r.hunt.acc)}% acc, ${r.hunt.errors} errors; Memory recall ${f1(r.mem.recall)}%. Educational demo, not a clinical assessment.`}
+function report(){const r=S.r;let t=`NEUROSPARK\nExplore Your Mind\n\nStudent Name: ${S.p.name}\nDepartment: ${S.p.dept}\nDate: ${today()}\n\n`;T.forEach(x=>{t+=`== ${x.n} ==\n${rows(x.k).map(a=>a.join(': ')).join('\n')}\nConcepts: ${INFO[x.k].c}\n${INFO[x.k].x}\nAbout errors: ${INFO[x.k].e}\n\n`});t+='== COGNITIVE PROFILE ==\n'+Object.entries(profile()).map(e=>e[0]+': '+Math.round(e[1])+'/100').join('\n')+'\n\nYour activity profile shows your performance across four cognitive tasks completed during the NeuroSpark exhibition.\n\nNeuroSpark activities are educational demonstrations of cognitive processes and are not diagnostic psychological tests.\n';return t}
+function dl(txt,name,mime='text/plain'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:mime}));a.download=name;a.click()}
+function results(){const pr=profile(),ks=Object.keys(pr),pt=ks.map((k,i)=>{const a=[-90,0,90,180][i]*Math.PI/180,v=pr[k]/100*100;return(150+v*Math.cos(a)).toFixed(1)+','+(150+v*Math.sin(a)).toFixed(1)}).join(' ');
+$('#results').innerHTML=`<div class="hero" style="padding:0"><h2 style="font-size:34px;color:var(--c)">YOUR NEUROSPARK RESULTS</h2><p class="meta">Participant: <b>${esc(S.p.name)}</b> · Department: <b>${esc(S.p.dept)}</b> · Date: <b>${today()}</b></p></div>
+<div class="grid">${T.map((t,i)=>`<div class="card rc" style="animation-delay:${i*.4}s"><span class="ic">${t.ic}</span><h4>${t.n}</h4><table>${rows(t.k).map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td></tr>`).join('')}</table><p class="meta" style="font-size:12px;min-height:0">${INFO[t.k].c}</p></div>`).join('')}</div>
+<div class="panel rc" style="animation-delay:1.8s;margin:22px auto"><h2>COGNITIVE PROFILE</h2><div class="two"><svg viewBox="0 0 300 300"><g fill="none" stroke="#2a4170">${[25,50,75,100].map(r=>`<polygon points="150,${150-r} ${150+r},150 150,${150+r} ${150-r},150"/>`).join('')}</g><polygon points="${pt}" fill="rgba(34,211,238,.3)" stroke="#22d3ee" stroke-width="2"/><g fill="#b8c7e0" font-size="9" text-anchor="middle"><text x="150" y="38">ATTENTION</text><text x="270" y="153">MEMORY</text><text x="150" y="272">INHIBITORY</text><text x="32" y="153">TIME/RESP.</text></g></svg>
+<div style="text-align:left">${ks.map(k=>`<div style="margin:10px 0">${k} <b style="float:right" data-n="${Math.round(pr[k])}">0</b><div class="bar"><i data-w="${pr[k]}"></i></div></div>`).join('')}</div></div>
+<p>Your activity profile shows your performance across four cognitive tasks completed during the NeuroSpark exhibition.</p><p class="disc">${DISC} Not a clinical diagnosis or IQ score.</p></div>
+<div class="panel" style="text-align:left"><h3 style="color:var(--c)">What did you experience?</h3>${T.map(t=>`<p><b>${t.n}:</b> ${INFO[t.k].x}</p>`).join('')}<h3 style="color:var(--c)">UNDERSTAND YOUR ERRORS</h3>${T.map(t=>`<details><summary>${t.n}</summary>${INFO[t.k].e} You made ${S.r[t.k].errors??S.r[t.k].error.toFixed(2)+' s of timing error'} in this activity.</details>`).join('')}</div>
+<div class="row" style="margin-top:20px"><button class="btn" id="dl">📄 DOWNLOAD RESULT</button><button class="btn" id="sm">📱 SEND TO MOBILE</button><button class="btn" id="rt">🔄 RETAKE TESTS</button><button class="btn" id="nw">👤 NEW PARTICIPANT</button><button class="btn" data-go="home">🏠 BACK TO HOME</button></div><div class="row"><div class="st" id="ss"></div></div><div class="row"><button class="btn ghost" id="csv" style="font-size:12px">Export all session records (CSV)</button></div>`;
+setTimeout(()=>{$$('[data-w]').forEach(i=>i.style.width=i.dataset.w+'%');$$('[data-n]').forEach(b=>{let n=0,e=+b.dataset.n;const iv=setInterval(()=>{n=Math.min(e,n+2);b.textContent=n;if(n>=e)clearInterval(iv)},25)})},2000);
+$('#dl').onclick=()=>{SFX.click();dl(report(),'NeuroSpark_'+S.p.name.replace(/\W+/g,'_')+'.txt')};$('#sm').onclick=()=>{SFX.click();send()};
+$('#rt').onclick=()=>{if(confirm('Retake all tests? Current results stay in the records list.')){S.r={};S.rec=0;S.sent='';save();show('lab')}};$('#nw').onclick=()=>{S={p:null,r:{},rec:0,sent:''};save();$('#rf').reset();show('reg')};
+$('#csv').onclick=()=>{const R=JSON.parse(localStorage.ns_rec||'[]');dl('Name,Department,College,Date,StroopCorrect,StroopErrors,StroopAcc,StroopRTms,StopwatchMeanError,Times,HuntCorrect,HuntErrors,HuntMissed,HuntAcc,HuntRTms,MemCorrect,MemErrors,MemRecall,MemTaps\n'+R.map(x=>x.join(',')).join('\n'),'neurospark_records.csv','text/csv')};
+$('#ss').textContent=S.sent;if(!S.rec){S.rec=1;record();save();confetti();SFX.done();send()}}
+function record(){const r=S.r,R=JSON.parse(localStorage.ns_rec||'[]');R.push([S.p.name,S.p.dept,S.p.college,new Date().toISOString(),r.stroop.correct,r.stroop.errors,f1(r.stroop.acc),Math.round(r.stroop.rt),r.watch.error.toFixed(2),'"'+r.watch.times.map(t=>t.toFixed(2)).join(' ')+'"',r.hunt.correct,r.hunt.errors,r.hunt.missed,f1(r.hunt.acc),Math.round(r.hunt.rt),r.mem.correct,r.mem.errors,f1(r.mem.recall),r.mem.attempts].map(v=>String(v).replace(/,(?!.*")/g,' ')));localStorage.ns_rec=JSON.stringify(R)}
+/* ===== Send to mobile: frontend only calls the backend. SMS keys + sending are in server.js ===== */
+async function send(){const el=$('#ss');el.textContent='Sending…';let t;try{const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({student:S.p,results:S.r,message:msg()})});const j=await res.json();t=j.sent?'✓ Results sent successfully to your registered mobile number.':'✓ Result prepared successfully (demo mode – SMS service not configured).'}catch(e){t='✓ Result prepared successfully (demo mode – backend not running).'}S.sent=t;save();if(el.isConnected)el.textContent=t}
+</script></body></html>
